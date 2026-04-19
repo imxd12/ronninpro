@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Ronnin Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body style="background: #050505; color: #fff; font-family: 'Outfit', sans-serif; padding: 20px;">
+<div class="log-filters scroll-anim">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="fuel">Fuel</button>
+    <button class="filter-btn" data-filter="service">Service</button>
+    <button class="filter-btn" data-filter="maintenance">Maint</button>
+    <button class="filter-btn" data-filter="mods">Mods</button>
+</div>
+
+<div class="scroll-anim glass-panel full-card" style="transition-delay: 0.1s">
+    <div class="log-list" id="main-log-list">
+        <!-- Dynamic filtered logs here -->
+        <p class="text-sub text-center load-pulse">Loading...</p>
+    </div>
+</div>
+
+</body>
+</html>

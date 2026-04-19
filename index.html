@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Ronnin Pro</title>
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#050505">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- Ambient Grid & Glow Detail -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="bg-grid"></div>
+
+    <!-- Detailed Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-logo"><i class="fas fa-motorcycle"></i></div>
+        <h1 class="brand-title">Ronnin <span class="brand-accent">Pro</span></h1>
+        <p class="splash-text">Igniting Engine...</p>
+    </div>
+
+    <!-- SVG Filter for Liquid Navigation -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feBlend in="SourceGraphic" in2="goo" />
+        </filter>
+    </svg>
+
+    <!-- Floating Dock Header -->
+    <header class="floating-header">
+        <div class="brand">
+            <h1>Ronnin <span class="brand-accent">Pro</span></h1>
+        </div>
+        <div class="header-icon" id="header-settings"><i class="fas fa-bars"></i></div>
+    </header>
+
+    <!-- Offline Indicator -->
+    <div id="offline-banner" class="offline-banner">
+        <i class="fas fa-wifi-slash"></i> Offline. Data saved locally.
+    </div>
+
+    <!-- Main View Router Container -->
+    <main id="app-root" class="app-container">
+        <!-- Content gets injected here -->
+        <div class="loader-wrapper"><div class="spinner"></div></div>
+    </main>
+
+    <!-- Modals Container -->
+    <div id="modals-root">
+        <!-- Modals injected here -->
+    </div>
+
+    <!-- Liquid Bottom Navigation Dock -->
+    <div class="dock-wrapper">
+        <!-- Central FAB -->
+        <div class="fab-menu" id="fab-menu">
+            <div class="fab-item" data-action="modal-add-fuel">
+                <span class="fab-label">Fuel</span>
+                <div class="fab-icon"><i class="fas fa-gas-pump"></i></div>
+            </div>
+            <div class="fab-item" data-action="modal-add-service">
+                <span class="fab-label">Service</span>
+                <div class="fab-icon"><i class="fas fa-oil-can"></i></div>
+            </div>
+            <div class="fab-item" data-action="modal-add-maintenance">
+                <span class="fab-label">Maint.</span>
+                <div class="fab-icon"><i class="fas fa-tools"></i></div>
+            </div>
+        </div>
+
+        <nav class="bottom-dock">
+            <div class="dock-bg-gooey">
+                <div class="active-indicator"></div>
+            </div>
+            <div class="dock-items">
+                <div class="dock-item active" data-route="dashboard">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="dock-item" data-route="logs">
+                    <i class="fas fa-list-alt"></i>
+                </div>
+                <div class="dock-item center-fab" id="main-fab">
+                    <div class="fab-inner">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+                <div class="dock-item" data-route="analytics">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <div class="dock-item" data-route="profile">
+                    <i class="fas fa-motorcycle"></i>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Animated Hamburger Menu -->
+    <nav id="hamburger-menu" class="hamburger-menu">
+        <div class="hamburger-overlay" id="hamburger-overlay"></div>
+        <div class="hamburger-drawer">
+            <div class="menu-header">
+                <h2>Ronnin <span class="brand-accent">Pro</span></h2>
+                <div class="header-icon menu-close" id="menu-close"><i class="fas fa-times"></i></div>
+            </div>
+            
+            <div class="menu-content">
+                <!-- Install Prompt -->
+                <div class="stagger-item" id="manual-install-group" style="display: none;">
+                    <button id="btn-manual-install" class="menu-btn install-btn">
+                        <i class="fas fa-download"></i> Install App
+                    </button>
+                </div>
+
+                <!-- Riding Modes -->
+                <div class="menu-section stagger-item">
+                    <h4 class="section-title"><i class="fas fa-palette"></i> Riding Modes</h4>
+                    <div class="ride-modes-grid">
+                        <div class="mode-card active" data-mode="cyber">
+                            <div class="mode-color" style="background: #00ffcc; box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);"></div>
+                            <span>Cyber</span>
+                        </div>
+                        <div class="mode-card" data-mode="sport">
+                            <div class="mode-color" style="background: #ff4757; box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);"></div>
+                            <span>Sport</span>
+                        </div>
+                        <div class="mode-card" data-mode="stealth">
+                            <div class="mode-color" style="background: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);"></div>
+                            <span>Stealth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data & Backup -->
+                <div class="menu-section stagger-item">
+                    <h4 class="section-title"><i class="fas fa-database"></i> Data & Backup</h4>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <button id="btn-export-data" class="menu-btn outline-btn">
+                            <i class="fas fa-file-pdf"></i> Export Info to PDF
+                        </button>
+                        <button id="btn-export-json" class="menu-btn outline-btn">
+                            <i class="fas fa-download"></i> Backup Data (.json)
+                        </button>
+                        <label for="file-import" class="menu-btn outline-btn" style="margin:0;">
+                            <i class="fas fa-upload"></i> Restore from Backup
+                        </label>
+                        <input type="file" id="file-import" accept=".json" style="display:none;">
+                    </div>
+                </div>
+
+                <!-- Theme Toggle -->
+                <div class="menu-section stagger-item glass-row">
+                    <span><i class="fas fa-sun"></i> Light Theme</span>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                 <!-- Emergency SOS Form -->
+                <div class="menu-section stagger-item mt-4">
+                    <h4 class="section-title text-danger"><i class="fas fa-heartbeat"></i> Medical SOS</h4>
+                    <div class="sos-box">
+                        <input type="text" id="sos-blood" placeholder="Blood Type (e.g. O+)" class="glass-input mb-2">
+                        <input type="text" id="sos-contact" placeholder="Emergency Contact Name & Phone" class="glass-input mb-2">
+                        <button class="menu-btn danger-glow" id="btn-save-sos">Save Settings</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
