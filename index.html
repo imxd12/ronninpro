@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Ronnin Pro</title>
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#050505">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="./style.css">
-</head>
+
 <body>
 
     <!-- Ambient Grid & Glow Detail -->
@@ -50,7 +53,9 @@
     <!-- Main View Router Container -->
     <main id="app-root" class="app-container">
         <!-- Content gets injected here -->
-        <div class="loader-wrapper"><div class="spinner"></div></div>
+        <div class="loader-wrapper">
+            <div class="spinner"></div>
+        </div>
     </main>
 
     <!-- Modals Container -->
@@ -58,48 +63,44 @@
         <!-- Modals injected here -->
     </div>
 
-    <!-- Liquid Bottom Navigation Dock -->
-    <div class="dock-wrapper">
-        <!-- Central FAB -->
+    <!-- Sleek Floating Dock -->
+    <div class="dock-container">
+        <nav class="mac-dock">
+            <div class="dock-item active" data-route="dashboard" title="Dashboard">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="dock-item" data-route="map" title="Trips & Map">
+                <i class="fas fa-map-marked-alt"></i>
+            </div>
+            <div class="dock-item center-fab" id="main-fab" title="Add Log">
+                <div class="fab-inner">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+            <div class="dock-item" data-route="analytics" title="Analytics">
+                <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="dock-item" data-route="profile" title="Profile">
+                <i class="fas fa-motorcycle"></i>
+            </div>
+            <div class="dock-indicator"></div>
+        </nav>
+        
+        <!-- FAB Menu (hidden inside dock normally, triggered by center fab) -->
         <div class="fab-menu" id="fab-menu">
             <div class="fab-item" data-action="modal-add-fuel">
                 <span class="fab-label">Fuel</span>
-                <div class="fab-icon"><i class="fas fa-gas-pump"></i></div>
+                <div class="fab-icon"><i class="fas fa-gas-pump text-accent"></i></div>
             </div>
             <div class="fab-item" data-action="modal-add-service">
                 <span class="fab-label">Service</span>
-                <div class="fab-icon"><i class="fas fa-oil-can"></i></div>
+                <div class="fab-icon"><i class="fas fa-oil-can text-danger"></i></div>
             </div>
             <div class="fab-item" data-action="modal-add-maintenance">
                 <span class="fab-label">Maint.</span>
-                <div class="fab-icon"><i class="fas fa-tools"></i></div>
+                <div class="fab-icon"><i class="fas fa-tools text-success"></i></div>
             </div>
         </div>
-
-        <nav class="bottom-dock">
-            <div class="dock-bg-gooey">
-                <div class="active-indicator"></div>
-            </div>
-            <div class="dock-items">
-                <div class="dock-item active" data-route="dashboard">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="dock-item" data-route="logs">
-                    <i class="fas fa-list-alt"></i>
-                </div>
-                <div class="dock-item center-fab" id="main-fab">
-                    <div class="fab-inner">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                </div>
-                <div class="dock-item" data-route="analytics">
-                    <i class="fas fa-chart-pie"></i>
-                </div>
-                <div class="dock-item" data-route="profile">
-                    <i class="fas fa-motorcycle"></i>
-                </div>
-            </div>
-        </nav>
     </div>
 
     <!-- Animated Hamburger Menu -->
@@ -110,7 +111,7 @@
                 <h2>Ronnin <span class="brand-accent">Pro</span></h2>
                 <div class="header-icon menu-close" id="menu-close"><i class="fas fa-times"></i></div>
             </div>
-            
+
             <div class="menu-content">
                 <!-- Install Prompt -->
                 <div class="stagger-item" id="manual-install-group" style="display: none;">
@@ -124,15 +125,18 @@
                     <h4 class="section-title"><i class="fas fa-palette"></i> Riding Modes</h4>
                     <div class="ride-modes-grid">
                         <div class="mode-card active" data-mode="cyber">
-                            <div class="mode-color" style="background: #00ffcc; box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);"></div>
+                            <div class="mode-color"
+                                style="background: #00ffcc; box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);"></div>
                             <span>Cyber</span>
                         </div>
                         <div class="mode-card" data-mode="sport">
-                            <div class="mode-color" style="background: #ff4757; box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);"></div>
+                            <div class="mode-color"
+                                style="background: #ff4757; box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);"></div>
                             <span>Sport</span>
                         </div>
                         <div class="mode-card" data-mode="stealth">
-                            <div class="mode-color" style="background: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);"></div>
+                            <div class="mode-color"
+                                style="background: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);"></div>
                             <span>Stealth</span>
                         </div>
                     </div>
@@ -155,6 +159,14 @@
                     </div>
                 </div>
 
+                <!-- Tools -->
+                <div class="menu-section stagger-item mt-4">
+                    <h4 class="section-title"><i class="fas fa-toolbox"></i> Tools</h4>
+                    <button id="btn-open-calc" class="menu-btn outline-btn">
+                        <i class="fas fa-calculator"></i> Smart Calculator
+                    </button>
+                </div>
+
                 <!-- Theme Toggle -->
                 <div class="menu-section stagger-item glass-row">
                     <span><i class="fas fa-sun"></i> Light Theme</span>
@@ -164,12 +176,29 @@
                     </label>
                 </div>
 
-                 <!-- Emergency SOS Form -->
+                <!-- Legal & Help -->
+                <div class="menu-section stagger-item mt-4">
+                    <h4 class="section-title"><i class="fas fa-info-circle"></i> Legal & Help</h4>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <button class="menu-btn outline-btn" onclick="window.Router.loadView('how-to-use'); document.getElementById('menu-close').click();">
+                            <i class="fas fa-book"></i> How to Use
+                        </button>
+                        <button class="menu-btn outline-btn" onclick="window.Router.loadView('terms'); document.getElementById('menu-close').click();">
+                            <i class="fas fa-file-contract"></i> Terms & Conditions
+                        </button>
+                        <button class="menu-btn outline-btn" onclick="window.Router.loadView('privacy'); document.getElementById('menu-close').click();">
+                            <i class="fas fa-user-shield"></i> Privacy Policy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Emergency SOS Form -->
                 <div class="menu-section stagger-item mt-4">
                     <h4 class="section-title text-danger"><i class="fas fa-heartbeat"></i> Medical SOS</h4>
                     <div class="sos-box">
                         <input type="text" id="sos-blood" placeholder="Blood Type (e.g. O+)" class="glass-input mb-2">
-                        <input type="text" id="sos-contact" placeholder="Emergency Contact Name & Phone" class="glass-input mb-2">
+                        <input type="text" id="sos-contact" placeholder="Emergency Contact Name & Phone"
+                            class="glass-input mb-2">
                         <button class="menu-btn danger-glow" id="btn-save-sos">Save Settings</button>
                     </div>
                 </div>
@@ -178,9 +207,32 @@
         </div>
     </nav>
 
+    <!-- Quick Trip Shortcut -->
+    <div class="quick-trip-fab" onclick="document.querySelector('[data-route=\'map\']').click(); setTimeout(()=>document.getElementById('btn-start-trip')?.click(), 500);">
+        <i class="fas fa-play"></i> Start Trip
+    </div>
+
+    <!-- Custom Alert/Confirm Modal -->
+    <div class="modal-overlay" id="custom-alert-modal" style="z-index: 10000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="max-width: 320px; height: auto; text-align: center; border-radius: 24px; padding: 30px 20px;">
+            <div style="font-size: 40px; color: var(--accent); margin-bottom: 15px;" id="custom-alert-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h3 id="custom-alert-title" style="margin-bottom: 10px;">Alert</h3>
+            <p id="custom-alert-msg" class="text-sub" style="margin-bottom: 20px; line-height: 1.5;"></p>
+            <input type="text" id="custom-alert-prompt" class="glass-input" style="display: none; margin-bottom: 25px; text-align: center;">
+            <div style="display: flex; gap: 10px; justify-content: center;" id="custom-alert-actions">
+                <button class="btn-secondary" id="custom-alert-cancel" style="display: none; flex: 1; border-radius: 14px;">Cancel</button>
+                <button class="btn-primary" id="custom-alert-ok" style="flex: 1; border-radius: 14px; margin: 0;">OK</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script type="module" src="./js/app.js"></script>
 </body>
+
 </html>
