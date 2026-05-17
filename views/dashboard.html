@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Ronnin Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body style="background: #050505; color: #fff; font-family: 'Outfit', sans-serif; padding: 20px;">
+<div class="scroll-anim dashboard-hero" style="transition-delay: 0.0s; margin-bottom: 12px;">
+    <h2 id="dash-greeting" class="font-bold mb-2">Good Morning, Rider</h2>
+    <p class="text-sub">Here is your bike's status today.</p>
+</div>
+
+<!-- Live Weather & Rideability -->
+<div class="scroll-anim glass-panel" style="transition-delay: 0.01s; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; padding:16px 20px;">
+    <div style="display:flex; align-items:center; gap:15px;">
+        <div id="weather-icon" style="font-size:32px; color:var(--accent);"><i class="fas fa-cloud-sun"></i></div>
+        <div>
+            <div class="font-bold" style="font-size:22px;" id="weather-temp">--°C</div>
+            <div class="text-sub" style="font-size:13px;" id="weather-desc">Fetching...</div>
+        </div>
+    </div>
+    <div style="text-align:right;">
+        <div class="text-sub" style="font-size:12px; margin-bottom:2px;">Ride Score</div>
+        <div class="eff-badge" id="weather-score" style="margin:0; padding:4px 10px; font-size:14px; background:rgba(0,255,204,0.1); color:var(--accent);">--%</div>
+    </div>
+</div>
+
+<!-- Smart Mileage Tracker (Speedometer & Range) -->
+<div class="scroll-anim glass-panel full-card text-center" style="transition-delay: 0.02s">
+    <div class="speedometer-wrapper">
+        <svg class="speed-svg" viewBox="0 0 100 100">
+            <defs>
+                <linearGradient id="speedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00ffcc" />
+                    <stop offset="100%" stop-color="#00b8d4" />
+                </linearGradient>
+            </defs>
+            <circle class="speed-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="speed-fill" id="dash-speed-fill" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="speed-text">
+            <span class="speed-value" id="dash-speed-value">0</span>
+            <span class="speed-unit">km/L</span>
+        </div>
+    </div>
+    <div class="eff-badge eff-C" id="dash-eff-badge">Efficiency: -</div>
+    
+    <div class="mt-4" style="display:flex; justify-content:space-around; align-items:center; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px;">
+        <div>
+            <div class="text-sub" style="font-size:12px;">Est. Range</div>
+            <div class="font-bold text-accent" style="font-size:20px;" id="dash-est-range">-- km</div>
+        </div>
+        <div>
+            <div class="text-sub" style="font-size:12px;">Cost / km</div>
+            <div class="font-bold text-danger" style="font-size:20px;" id="dash-cost-km">--</div>
+        </div>
+        <div>
+            <div class="text-sub" style="font-size:12px;">Tank Cap.</div>
+            <div class="font-bold" style="font-size:20px;" id="dash-fuel-cap">-- L</div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Smart Inspector -->
+<div class="scroll-anim" style="transition-delay: 0.04s; margin-bottom:24px;">
+    <h3 class="mb-2"><i class="fas fa-microchip text-accent"></i> AI Smart Inspector</h3>
+    <div id="dash-ai-suggestions"></div>
+</div>
+
+
+<div class="scroll-anim glass-panel alert-card" id="dashboard-alert" style="transition-delay: 0.05s">
+    <i class="fas fa-exclamation-triangle"></i>
+    <div class="alert-details">
+        <div class="alert-title font-bold">Upcoming Service</div>
+        <div class="alert-desc text-sub" id="alert-desc-text">Service due in 200 km</div>
+    </div>
+</div>
+
+<div class="scroll-anim glass-panel full-card" style="transition-delay: 0.1s">
+    <h3 class="mb-2"><i class="fas fa-heartbeat text-accent"></i> Vehicle Health</h3>
+    <div class="health-bar-container">
+        <div class="health-label">
+            <span>Next Service Due</span>
+            <span id="health-service-dist" class="text-accent font-bold">-- km</span>
+        </div>
+        <div class="health-bar-bg">
+            <div class="health-bar-fill" id="health-service-bar"></div>
+        </div>
+    </div>
+    <div class="quick-actions mt-4">
+        <button class="qa-btn" onclick="document.querySelector('.fab-item[data-action=\'modal-add-fuel\']').click()">
+            <div class="qa-icon" style="color:#00ffcc"><i class="fas fa-gas-pump"></i></div>
+            <span>Fuel</span>
+        </button>
+        <button class="qa-btn" onclick="document.querySelector('.fab-item[data-action=\'modal-add-service\']').click()">
+            <div class="qa-icon" style="color:#ff4757"><i class="fas fa-oil-can"></i></div>
+            <span>Service</span>
+        </button>
+        <button class="qa-btn" onclick="document.querySelector('.fab-item[data-action=\'modal-add-maintenance\']').click()">
+            <div class="qa-icon" style="color:#2ed573"><i class="fas fa-tools"></i></div>
+            <span>Maint</span>
+        </button>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="scroll-anim glass-panel stat-card" style="transition-delay: 0.15s">
+        <i class="fas fa-tachometer-alt"></i>
+        <div class="stat-value" id="dash-odo">0</div>
+        <div class="stat-label">Current ODO (km)</div>
+    </div>
+    <div class="scroll-anim stat-card glass-panel" style="transition-delay: 0.2s">
+        <i class="fas fa-route"></i>
+        <div class="stat-value" id="dash-mileage">0.0</div>
+        <div class="stat-label">Avg Mileage (km/L)</div>
+    </div>
+    <div class="scroll-anim stat-card glass-panel" style="transition-delay: 0.25s">
+        <i class="fas fa-gas-pump"></i>
+        <div class="stat-value" id="dash-fuel">0</div>
+        <div class="stat-label">Total Fuel (L)</div>
+    </div>
+    <div class="scroll-anim stat-card glass-panel" style="transition-delay: 0.3s">
+        <i class="fas fa-tools"></i>
+        <div class="stat-value" id="dash-maint">$0</div>
+        <div class="stat-label">Total Maint.</div>
+    </div>
+</div>
+
+<div class="scroll-anim glass-panel full-card" style="transition-delay: 0.5s">
+    <h3 class="mb-2">Recent Logs</h3>
+    <div class="log-list" id="dash-recent-logs">
+        <!-- Dynamic logs here -->
+        <p class="text-sub text-center load-pulse">Loading...</p>
+    </div>
+</div>
+
+<div class="scroll-anim glass-panel full-card mt-4" style="transition-delay: 0.6s">
+    <div style="display:flex; justify-content:space-between; align-items:center;" class="mb-3">
+        <h3 style="margin:0;"><i class="fas fa-cogs text-accent"></i> Component Health</h3>
+        <button class="menu-btn outline-btn" style="width:auto; padding:6px 12px; font-size:12px; margin:0;" data-action="modal-add-component"><i class="fas fa-plus"></i> Add</button>
+    </div>
+    <div id="components-list" class="components-grid">
+        <p class="text-sub text-center w-100" style="grid-column: 1/-1;">No components tracked yet.</p>
+    </div>
+</div>
+
+</body>
+</html>

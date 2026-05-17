@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Ronnin Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body style="background: #050505; color: #fff; font-family: 'Outfit', sans-serif; padding: 20px;">
+<!-- Modal: Add Fuel -->
+<div class="modal-overlay" id="modal-add-fuel">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add Fuel Log</h3>
+            <button class="close-modal" aria-label="close" data-close="modal-add-fuel"><i class="fas fa-times"></i></button>
+        </div>
+        <form id="form-add-fuel">
+            <input type="hidden" id="fuel-id">
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="fuel-date" required>
+            </div>
+            <div class="form-group">
+                <label>Liters</label>
+                <input type="number" id="fuel-liters" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Total Price ($)</label>
+                <input type="number" id="fuel-price" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Current Odometer (km)</label>
+                <input type="number" id="fuel-odo" required>
+            </div>
+            <div class="form-group">
+                <label>Fuel Station (Optional)</label>
+                <input type="text" id="fuel-station" placeholder="e.g. Shell, BP">
+            </div>
+            <div class="form-group">
+                <label>Fuel Grade</label>
+                <select id="fuel-grade" class="glass-input">
+                    <option value="Regular" style="color:black">Regular</option>
+                    <option value="Premium" style="color:black">Premium</option>
+                    <option value="Diesel" style="color:black">Diesel</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-primary">Save Entry</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal: Add Service -->
+<div class="modal-overlay" id="modal-add-service">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Log Service</h3>
+            <button class="close-modal" aria-label="close" data-close="modal-add-service"><i class="fas fa-times"></i></button>
+        </div>
+        <form id="form-add-service">
+            <input type="hidden" id="service-id">
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="service-date" required>
+            </div>
+            <div class="form-group">
+                <label>Service Type</label>
+                <input type="text" id="service-type" placeholder="e.g. Regular Service" required>
+            </div>
+            <div class="form-group">
+                <label>Cost ($)</label>
+                <input type="number" id="service-cost" required>
+            </div>
+            <div class="form-group">
+                <label>Current Odometer (km)</label>
+                <input type="number" id="service-odo" required>
+            </div>
+            <div class="form-group">
+                <label>Next Service Due (km)</label>
+                <input type="number" id="service-next-odo" required>
+            </div>
+            <div class="form-group">
+                <label>Service Center / Mechanic</label>
+                <input type="text" id="service-center" placeholder="e.g. Official TVS Moto">
+            </div>
+            <div class="form-group">
+                <label>Notes / Remarks</label>
+                <input type="text" id="service-notes" placeholder="Chain tightened, oil changed...">
+            </div>
+            <button type="submit" class="btn-primary">Save Entry</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal: Add Maintenance -->
+<div class="modal-overlay" id="modal-add-maintenance">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Log Maintenance</h3>
+            <button class="close-modal" aria-label="close" data-close="modal-add-maintenance"><i class="fas fa-times"></i></button>
+        </div>
+        <form id="form-add-maintenance">
+            <input type="hidden" id="maint-id">
+            <div class="form-group">
+                <label>Part Replaced / Repaired</label>
+                <input type="text" id="maint-part" placeholder="e.g. Brake Pads" required>
+            </div>
+            <div class="form-group">
+                <label>Cost ($)</label>
+                <input type="number" id="maint-cost" required>
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="maint-date" required>
+            </div>
+            <div class="form-group">
+                <label>Reason</label>
+                <select id="maint-reason" class="glass-input">
+                    <option value="Wear & Tear" style="color:black">Wear & Tear</option>
+                    <option value="Accident" style="color:black">Accident Damage</option>
+                    <option value="Upgrade" style="color:black">Upgrade</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Warranty (Months)</label>
+                <input type="number" id="maint-warranty" placeholder="0">
+            </div>
+            <button type="submit" class="btn-primary">Save Entry</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal: Edit Profile -->
+<div class="modal-overlay" id="modal-edit-profile">
+    <div class="modal-content modal-fullscreen">
+        <div class="modal-header sticky-header">
+            <h3>Edit Bike Profile</h3>
+            <button class="close-modal" aria-label="close" data-close="modal-edit-profile"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-scroll-area">
+            <form id="form-edit-profile">
+                <input type="hidden" id="ep-id">
+                <!-- Group 1: Basics -->
+                <h4 class="form-section-title"><i class="fas fa-user"></i> Rider Profile</h4>
+                <div class="form-group"><label>Your Name</label><input type="text" id="ep-username" required></div>
+                <div class="form-group"><label>Blood Group</label><input type="text" id="ep-blood" placeholder="e.g. O+"></div>
+                <div class="form-group"><label>Emergency Contact</label><input type="tel" id="ep-emg" placeholder="Phone Number"></div>
+                <div class="form-group"><label>Riding Experience (Years)</label><input type="number" id="ep-exp" placeholder="e.g. 5"></div>
+                
+                <h4 class="form-section-title"><i class="fas fa-info-circle"></i> Basic Info</h4>
+                <div class="form-group"><label>Bike Name</label><input type="text" id="ep-name" required></div>
+                <div class="form-group"><label>Model</label><input type="text" id="ep-model" required></div>
+                <div class="form-group"><label>Engine CC</label><input type="number" id="ep-cc" required></div>
+                <div class="form-group"><label>Initial ODO (km)</label><input type="number" id="ep-iodo" required></div>
+                <div class="form-group"><label>Purchase Date</label><input type="date" id="ep-date" required></div>
+                <div class="form-group"><label>Service Interval (km)</label><input type="number" id="ep-sint" required></div>
+                
+                <!-- Group 2: Docs -->
+                <h4 class="form-section-title"><i class="fas fa-file-contract"></i> Official Documents</h4>
+                <div class="form-group"><label>Registration Number</label><input type="text" id="ep-reg"></div>
+                <div class="form-group"><label>VIN / Chassis Number</label><input type="text" id="ep-vin"></div>
+                <div class="form-group"><label>Engine Number</label><input type="text" id="ep-eng"></div>
+                <div class="form-group"><label>Insurance Expiry Date</label><input type="date" id="ep-insp"></div>
+                <div class="form-group"><label>Pollution (PUC) Expiry Date</label><input type="date" id="ep-puc"></div>
+
+                <!-- Group 3: Specs -->
+                <h4 class="form-section-title"><i class="fas fa-cogs"></i> Dimensions & Specs</h4>
+                <div class="form-group"><label>Fuel Capacity (Liters)</label><input type="number" step="0.1" id="ep-fuelcap"></div>
+                <div class="form-group"><label>Weight (kg)</label><input type="number" step="0.1" id="ep-weight"></div>
+                <div class="form-group"><label>Battery Spec (e.g. 12V 8Ah)</label><input type="text" id="ep-voltage"></div>
+                <div class="form-group"><label>Front Tire Pressure (psi)</label><input type="text" id="ep-tiref"></div>
+                <div class="form-group"><label>Rear Tire Pressure (psi)</label><input type="text" id="ep-tirer"></div>
+                
+                <button type="submit" class="btn-primary mt-4 mb-4" style="height:60px; font-size:18px;">Save Profile Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Install App Prompt -->
+<div class="modal-overlay" id="modal-install-prompt" style="align-items: flex-start; padding-top: 40px;">
+    <div class="floating-install-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:16px;">
+                <div style="width:50px; height:50px; background:var(--surface-light); border-radius:14px; display:flex; justify-content:center; align-items:center;">
+                    <i class="fas fa-motorcycle text-accent" style="font-size:24px;"></i>
+                </div>
+                <div>
+                    <h3 style="font-size:18px; margin:0;">Install App</h3>
+                    <p class="text-sub" style="font-size:13px; margin:0;">Optimal Offline Experience</p>
+                </div>
+            </div>
+            <button class="close-modal" data-close="modal-install-prompt" style="background:transparent; padding:0; width:auto; height:auto; font-size:20px; outline:none;"><i class="fas fa-times"></i></button>
+        </div>
+        <button id="btn-trigger-install" class="btn-primary" style="margin-top:20px; font-size:15px; padding:14px;">Add to Home Screen</button>
+    </div>
+</div>
+
+
+<!-- Modal: Smart Calculator -->
+<div class="modal-overlay" id="modal-smart-calc">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Smart Calculator</h3>
+            <button class="close-modal" aria-label="close" data-close="modal-smart-calc"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="calc-container" style="background: var(--surface); padding: 15px; border-radius: 12px; margin-top: 10px;">
+            <div class="calc-history" id="calc-history-display" style="text-align: right; min-height: 20px; font-size: 14px; color: var(--text-sub);"></div>
+            <div class="calc-display" id="calc-display" style="text-align: right; font-size: 32px; font-weight: bold; margin-bottom: 15px; word-break: break-all;">0</div>
+            <div class="calc-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                <button class="menu-btn outline-btn calc-btn" data-val="C" style="color: var(--danger)">C</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="DEL" style="color: var(--warning)">DEL</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="%">%</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="/" style="color: var(--accent)">/</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="7">7</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="8">8</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="9">9</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="*" style="color: var(--accent)">*</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="4">4</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="5">5</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="6">6</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="-" style="color: var(--accent)">-</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="1">1</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="2">2</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="3">3</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="+" style="color: var(--accent)">+</button>
+                <button class="menu-btn outline-btn calc-btn" data-val="0" style="grid-column: span 2;">0</button>
+                <button class="menu-btn outline-btn calc-btn" data-val=".">.</button>
+                <button class="btn-primary calc-btn" data-val="=" style="background: var(--accent); color: #000;">=</button>
+            </div>
+            <div class="mt-4" style="border-top: 1px solid var(--border); padding-top: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <h4 style="font-size: 14px; margin: 0;">History</h4>
+                    <button class="btn-secondary" id="calc-clear-history" style="padding: 4px 8px; font-size: 12px; width: auto;">Clear</button>
+                </div>
+                <div id="calc-history-list" style="max-height: 120px; overflow-y: auto; font-size: 13px; color: var(--text-sub);"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Add Component -->
+<div class="modal-overlay" id="modal-add-component">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add Component Tracker</h3>
+            <button class="close-modal" aria-label="close" data-close="modal-add-component"><i class="fas fa-times"></i></button>
+        </div>
+        <form id="form-add-component">
+            <input type="hidden" id="comp-id">
+            <div class="form-group">
+                <label>Component Name</label>
+                <input type="text" id="comp-name" placeholder="e.g. Chain, Front Tire" required>
+            </div>
+            <div class="form-group">
+                <label>Expected Lifespan (km)</label>
+                <input type="number" id="comp-lifespan" required>
+            </div>
+            <div class="form-group">
+                <label>Installed at ODO (km)</label>
+                <input type="number" id="comp-installed" required>
+            </div>
+            <button type="submit" class="btn-primary">Save Tracker</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
