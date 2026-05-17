@@ -106,7 +106,7 @@ export const Router = {
             document.getElementById('dash-odo').innerText = stats.totalOdo;
             document.getElementById('dash-mileage').innerText = stats.avgMileage.toFixed(2);
             document.getElementById('dash-fuel').innerText = stats.totalFuel.toFixed(2);
-            document.getElementById('dash-maint').innerText = `$${stats.totalMaintCost}`;
+            document.getElementById('dash-maint').innerText = `₹${stats.totalMaintCost}`;
             
             // Speedometer & Efficiency
             const speedValueEl = document.getElementById('dash-speed-value');
@@ -116,7 +116,7 @@ export const Router = {
             const fuelCapEl = document.getElementById('dash-fuel-cap');
             const costKmEl = document.getElementById('dash-cost-km');
 
-            if(costKmEl) costKmEl.innerText = stats.costPerKm > 0 ? `$${stats.costPerKm.toFixed(2)}` : '--';
+            if(costKmEl) costKmEl.innerText = stats.costPerKm > 0 ? `₹${stats.costPerKm.toFixed(2)}` : '--';
 
             if(speedValueEl) speedValueEl.innerText = stats.avgMileage.toFixed(1);
             if(speedFillEl) {
@@ -385,9 +385,9 @@ export const Router = {
 
     createLogHTML(log) {
         let title = log.type || 'Log', val = '', icon = '<i class="fas fa-clipboard-list"></i>';
-        if(log.type === 'Fuel') { val = `$${log.price}`; icon = '<i class="fas fa-gas-pump" style="color:var(--accent)"></i>'; }
-        if(log.type === 'Service') { title = log.typeText; val = `$${log.cost}`; icon = '<i class="fas fa-oil-can" style="color:var(--danger)"></i>'; }
-        if(log.type === 'Maintenance') { title = log.part; val = `$${log.cost}`; icon = '<i class="fas fa-tools" style="color:var(--success)"></i>'; }
+        if(log.type === 'Fuel') { val = `₹${log.price}`; icon = '<i class="fas fa-gas-pump" style="color:var(--accent)"></i>'; }
+        if(log.type === 'Service') { title = log.typeText; val = `₹${log.cost}`; icon = '<i class="fas fa-oil-can" style="color:var(--danger)"></i>'; }
+        if(log.type === 'Maintenance') { title = log.part; val = `₹${log.cost}`; icon = '<i class="fas fa-tools" style="color:var(--success)"></i>'; }
 
         let formattedDate = log.date;
         if(log.date) {
