@@ -194,7 +194,7 @@ export const Analytics = {
                     data: {
                         labels: ['Fuel', 'Service', 'Maintenance'],
                         datasets: [{
-                            label: 'Total Cost ($)',
+                            label: 'Total Cost (₹)',
                             data: [fuelCost, serviceCost, maintC],
                             backgroundColor: ['#00ffcc', '#ff4757', '#2ed573'],
                             borderRadius: 4
@@ -297,7 +297,7 @@ export const Analytics = {
             `Total ODO: ${stats.totalOdo} km`,
             `Average Mileage: ${stats.avgMileage.toFixed(2)} km/L`,
             `Total Fuel Consumed: ${stats.totalFuel.toFixed(2)} L`,
-            `Total Maintenance Cost: $${stats.totalMaintCost.toFixed(2)}`,
+            `Total Maintenance Cost: ₹${stats.totalMaintCost.toFixed(2)}`,
             `Efficiency Score: ${stats.efficiencyScore}`,
             `Estimated Range: ${stats.estimatedRange} km`
         ];
